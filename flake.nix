@@ -24,18 +24,22 @@
         nodePackages_latest.pnpm
       ];
       nativeBuildInputs = buildInputs;
-      npmDepsHash = "sha256-MTBGrEPqQMS9l07eGseiAskos5DIu1BgTVoIuOEQ+0k=";
-    in {
+      npmDepsHash = "sha256-Whm88ZQgIwIdWJKp79gNH5FnleDGzNCPOIbBChzPNSw=";
+    in rec {
       devShells.default = pkgs.mkShell {
         inherit buildInputs;
         shellHook = ''
           #!/usr/bin/env bash
         '';
       };
+      apps.default = {
+        type = "app";
+        program = "${packages.default}/bin/portfolio-site";
+      };
       packages.default = pkgs.buildNpmPackage {
         inherit pname version buildInputs npmDepsHash nativeBuildInputs;
         makeCacheWritable = true;
-        npmFlags = [ "--legacy-peer-deps" ];
+        __noChroot = true;
         src = ./.;
         postInstall = ''
           mkdir -p $out/bin
