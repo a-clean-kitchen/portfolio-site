@@ -22,6 +22,7 @@
       buildInputs = with pkgs; [
         nodejs_20
         nodePackages_latest.pnpm
+        typescript
       ];
       nativeBuildInputs = buildInputs;
       npmDepsHash = "sha256-Whm88ZQgIwIdWJKp79gNH5FnleDGzNCPOIbBChzPNSw=";

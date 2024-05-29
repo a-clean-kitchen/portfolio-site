@@ -1,4 +1,4 @@
-.PHONY: depFetch
+.PHONY: depHashFetch
 
-depFetch:
+depHashFetch:
 	nix run nixpkgs#prefetch-npm-deps -- package-lock.json
